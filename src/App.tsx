@@ -1,8 +1,9 @@
-import Home from "./components/Home";
-function App() {
+import Details from "./Details";
+/* import Home from "./components/Home";
+ */ function App() {
   return (
     <>
-      <Home />
+      <Details />
     </>
   );
 }
