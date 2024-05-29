@@ -1,5 +1,5 @@
-import styles from "./App.module.css";
-
+import styles from "./NavBar.module.css";
+import NavButton from "./NavButton";
 function NavBar() {
   return (
     <>
@@ -49,31 +49,11 @@ function NavBar() {
           </ul>
         </div>
         <nav id="navbar">
-          <li className={styles["nav-li"]}>
-            <a className={styles["nav-a"]} href="#">
-              Ofertas
-            </a>
-          </li>
-          <li className={styles["nav-li"]}>
-            <a className={styles["nav-a"]} href="#">
-              Cómo comprar
-            </a>
-          </li>
-          <li className={styles["nav-li"]}>
-            <a className={styles["nav-a"]} href="#">
-              Costos y tarifas
-            </a>
-          </li>
-          <li className={styles["nav-li"]}>
-            <a className={styles["nav-a"]} href="#">
-              Mis pedidos
-            </a>
-          </li>
-          <li className={styles["nav-li"]}>
-            <a className={styles["nav-a"]} href="#">
-              Garantía
-            </a>
-          </li>
+          <NavButton title="Ofertas" link="#" />
+          <NavButton title="Cómo comprar" link="#" />
+          <NavButton title="Costos y tarifas" link="#" />
+          <NavButton title="Mis pedidos" link="#" />
+          <NavButton title="Garantía" link="#" />
         </nav>
       </header>
     </>
