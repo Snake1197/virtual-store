@@ -1,12 +1,12 @@
-import styles from "../App.module.css";
-import Hero from "../components/Hero";
-import NavBar from "../components/NavBar";
-import Footer from "../components/Footer";
+import styles from "./App.module.css";
+import Hero from "./components/Hero";
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 function Home() {
   return (
     <>
       <NavBar />
-      <Hero />
+      <Hero first="tecnología" second="renovada" />
       <main>
         <div className={styles["product-container"]} id="products">
           <a className={styles["product-card"]} href="./details.html">

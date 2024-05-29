@@ -1,9 +1,9 @@
-import styles from "./Details.module.css";
-import Footer from "./components/Footer";
+import styles from "./Cart.module.css";
 import NavButton from "./components/NavButton";
-import Ofertas from "./components/Ofertas";
+import Footer from "./components/Footer";
+import Hero from "./components/Hero";
 import { Link } from "react-router-dom";
-function Details() {
+function Cart() {
   return (
     <>
       <header>
@@ -34,7 +34,7 @@ function Details() {
               </Link>
             </li>
             <li id="cart" className={styles["header-li"]}>
-              <Link className={styles["header-a"]} to="/cart">
+              <Link className={styles["header-a"]} to="./cart">
                 <img
                   className={styles["header-social-img"]}
                   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAAAXNSR0IArs4c6QAAA81JREFUaEPtml2ITVEUx/9/UsjDiDFJHpQ8iAfNNCFfSV4YKUUzJOHVw0QKTT4ilDJ58UBpkq/yIIM3GV9NE0Z58aCRfGZGyseDByx3ZV/dtn3vuedjnzNz792vZ++11m//V3vts84hqmywynhRA650xWsK1xSusB2opXSFCfofTk1h3RIRkRGu9ACAXSSv2RxOhSsAWDl/A6gj+a0QupKBlXMayffVAjxEcko1pfQFkpvKAnYdWCJSD+ADgNHW8+Uk72R1yImIxvMVwHgrho0kL0YGNqf3DQCrLCPnSG7NEHgZAHvDtcpMJPklLvAGAJctI98B1JP8kQW0iBwHsNvy3UdyviueUBcPERkLYAjABMtYK0l7I1LhF5FnAOZazvaTPBQb2KT1WQDbLGO3SNqp7h3YnCuDDkfNuXgeJQW8FECPZewXgKkkVf3UhojoxqsAhUNjaCDpvC2GSmmjsK55o0XdctROsjM12r9X4KsA1lk+z5PcXCyO0MAG+giAvZbRfpKNaQGXKEdtJC8lDTwDwEuH0dkkn6cBLSKLAdyzfBUtR/l5kRQ2Kuuh0GQ5PEZyT0rArizrJbmwlP84wDsAnLKMvwMwvdiBkeRGiEg/gHmWzQ6Sh30B1wH4lMVVs0Q5aiL5xAuwSetuAKstBw8A3E5STYetWQBa7XLkejuy10ZOaQO8HsAVz3Dlmu8iuSVoclzgMQA+O66aQX59PF9BMjCzYgEblc8A2O6DIITN+ySXlDM/CWB1dLccZ57maMNuQbnX2tjARuXXWo4soMcAbnqCzJv9SPJ0GB9JAWvt22c5HiA5M0wwacxNCrjYVTOwLqYBWegjEWCT1n0Ami2AzlybpT1tKG8Xj0LDIuK6av4E0EhSuxLDYiSp8KRceXoLQNtA9tDu4QsPxD0k7WZESTeJAZu0PgFgpwewYiYPkjwQxl/SwJMBaIkaFyaIGHOzBTYqrwSgX+3SgM4e2EBr2/Soo2kfQ0zn0uEBnA8t12SbY3rG2vCze9lJwGd7aCVB4NtGooeW72CTsO8dWEROAmgDoCd4b65Oa6NPP8oFjjhrixn3Ciwi1wG0OJy3BEHHWVtqJ70Bi4j2urTn5RoPSS4qFlictUFp4xO4A4DzC57+cELS/rD+L1YRibw2S2DXy0Q+nsHci3tDCYUjr80SWDsgr3Iqj3IEUfK1UUQir80M2Ny49KeSLgu6m+SaoMBEJPLaTA6tgtuWqrVWfxID8DTodC4M1igdaW0mZSlIxSyeezuls4Apx2cNuJxdGslzagqPZPXKib3qFP4DPc5DTOx+iUAAAAAASUVORK5CYII="
@@ -51,99 +51,58 @@ function Details() {
           <NavButton title="Garantía" link="#" />
         </nav>
       </header>
+      <Hero first="mi" second="carrito" />
       <main>
-        <div className={styles["details-container"]}>
-          <div id="details" className={styles["columns-container"]}>
-            <section className={styles["product-images-block"]}>
-              <div className={styles["product-images"]}>
-                <img
-                  className={styles["mini-img"]}
-                  src="https://i.postimg.cc/HxGQcrcp/mock1.jpg"
-                  alt="MacBook Pro 13'4"
-                />
-                <img
-                  className={styles["mini-img"]}
-                  src="https://i.postimg.cc/Y91Q1tYQ/mock2.jpg"
-                  alt="MacBook Pro 13'4"
-                />
-              </div>
-              <img
-                className={styles["big-img"]}
-                id="big-img"
-                src="https://i.postimg.cc/HxGQcrcp/mock1.jpg"
-                alt="MacBook Pro 13'4"
-              />
-            </section>
-            <div className={styles["product-description-block"]}>
-              <h1 className={styles["product-title"]}>MacBook Pro 13'4</h1>
-              <form className={styles["product-selector"]}>
-                <fieldset className={styles["product-fieldset"]}>
-                  <label className={styles["product-label"]} htmlFor="color">
-                    Color
-                  </label>
-                  <select className={styles["product-select"]} id="color">
-                    <option value="Silver">Silver</option>
-                  </select>
-                </fieldset>
-              </form>
-              <div className={styles["product-description"]}>
-                <span className={styles["product-label"]}>Descripción</span>
-                <p>
-                  Experience the power of creativity with the MacBook Pro 13'4.
-                  Featuring 8GB of RAM and 512GB of storage, this laptop
-                  provides the performance and storage capacity needed for
-                  demanding tasks. The sleek design in silver and space gray
-                  adds a touch of sophistication. The high-resolution Retina
-                  display brings your visuals to life, whether you're editing
-                  photos, creating videos, or simply browsing the web. With the
-                  latest technology and a lightweight build, the MacBook Pro
-                  13'4 is the perfect companion for professionals and creative
-                  individuals alike.
-                </p>
-              </div>
-            </div>
-            <div className={styles["product-checkout-block"]}>
-              <div className={styles["checkout-container"]}>
-                <span className={styles["checkout-total-label"]}>Total:</span>
-                <h2 id="price" className={styles["checkout-total-price"]}>
-                  $750000
-                </h2>
-                <p className={styles["checkout-description"]}>
-                  Incluye impuesto PAIS y percepción AFIP. Podés recuperar AR$
-                  50711 haciendo la solicitud en AFIP.
-                </p>
-                <ul className={styles["checkout-policy-list"]}>
-                  <li>
-                    <span className={styles["policy-icon"]}>
-                      <img src="/truck.png" alt="Truck" />
-                    </span>
-                    <span className={styles["policy-desc"]}>
-                      Agrega el producto al carrito para conocer los costos de
-                      envío
-                    </span>
-                  </li>
-                  <li>
-                    <span className={styles["policy-icon"]}>
-                      <img src="/plane.png" alt="Plane" />
-                    </span>
-                    <span className={styles["policy-desc"]}>
-                      Recibí aproximadamente entre 10 y 15 días hábiles,
-                      seleccionando envío normal
-                    </span>
-                  </li>
-                </ul>
-                <div className={styles["checkout-process"]}>
-                  <div className={styles["top"]}>
-                    <input type="number" min="1" value="1" />
-                    <button type="button" className={styles["cart-btn"]}>
-                      Añadir al Carrito
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <article className={styles["product-cart"]}>
+          <img
+            className={styles["product-img"]}
+            src="https://i.postimg.cc/kX8PKZpq/ipad.jpg"
+            alt="ipad"
+          />
+          <div className={styles["product-details"]}>
+            <strong className={styles["product-title"]}>iPad Pro 13</strong>
+            <span className={styles["product-description"]}>- Silver</span>
+            <p className={styles["product-description"]}>
+              The iPad Pro 13 is a stunning piece of technology, boasting a
+              large 12.9-inch Retina display with ProMotion technology. With
+              256GB of storage, this iPad provides ample space for all your
+              files, apps, and multimedia content. The sleek and slim design,
+              combined with the silver color, gives it a sophisticated look.
+              Enjoy seamless connectivity with the WiFi feature. Capture your
+              memorable moments with the high-quality camera and relive them on
+              the impressive screen. Whether you're a professional artist,
+              student, or just someone who appreciates cutting-edge technology,
+              the iPad Pro 12.9 is a versatile device that meets all your needs.
+            </p>
+            <input
+              className={styles["product-input"]}
+              type="number"
+              name="quantity"
+              value="1"
+              min="1"
+              id="P7Q8R90"
+            />
           </div>
-          <Ofertas />
+          <strong className={styles["price"]}>AR$ $800000</strong>
+        </article>
+        <div className={styles["cart-resume"]}>
+          <div className={styles["cart-data"]}>
+            <h2 className={styles["cart-title"]}>
+              <span>Resumen</span>
+              <span>del</span>
+              <span>pedido</span>
+            </h2>
+            <div className={styles["cart-total"]}>
+              <h3>Total</h3>
+              <strong className={styles["cart-price"]}>$800000</strong>
+            </div>
+            <small className={styles["cart-tax"]}>
+              Incluye impuesto PAIS y percepción AFIP.
+            </small>
+          </div>
+          <button className={styles["cart-btn"]} id="buy" type="button">
+            COMPRAR
+          </button>
         </div>
       </main>
       <Footer />
@@ -151,4 +110,4 @@ function Details() {
   );
 }
 
-export default Details;
+export default Cart;

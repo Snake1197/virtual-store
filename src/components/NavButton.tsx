@@ -1,22 +1,21 @@
-import styles from './NavButton.module.css'
-
+import { Link } from "react-router-dom";
+import styles from "./NavButton.module.css";
 
 interface NavButtonProps {
-    title: string;
-    link: string;
+  title: string;
+  link: string;
 }
 
 function NavButton({ title, link }: NavButtonProps) {
-    return (
-        <>
-        <li className={styles["nav-li"]}>
-            <a className={styles["nav-a"]} href={link}>
-                {title}
-            </a>
-        </li>
-</>
-    );
+  return (
+    <>
+      <li className={styles["nav-li"]}>
+        <Link className={styles["nav-a"]} to={link}>
+          {title}
+        </Link>
+      </li>
+    </>
+  );
 }
 
-
-export default NavButton
+export default NavButton;

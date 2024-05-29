@@ -1,12 +1,17 @@
 import styles from "./Hero.module.css";
 
-function Hero() {
+interface HeroProps {
+  first: string;
+  second: string;
+}
+
+function Hero({ first, second }: HeroProps) {
   return (
     <>
       <section className={styles["hero-section"]}>
         <article className={styles["hero-title"]}>
-          <span className={styles["hero-span"]}>tecnología</span>
-          <span className={styles["hero-span"]}>renovada</span>
+          <span className={styles["hero-span"]}>{first}</span>
+          <span className={styles["hero-span"]}>{second}</span>
         </article>
       </section>
     </>
