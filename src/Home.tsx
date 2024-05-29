@@ -1,7 +1,9 @@
 import styles from "./App.module.css";
 import Hero from "./components/Hero";
 import NavBar from "./components/NavBar";
+import ProductCard from "./components/ProductCard";
 import Footer from "./components/Footer";
+import products from './assets/products';
 function Home() {
   return (
     <>
@@ -9,114 +11,16 @@ function Home() {
       <Hero first="tecnología" second="renovada" />
       <main>
         <div className={styles["product-container"]} id="products">
-          <a className={styles["product-card"]} href="./details.html">
-            <img
-              className={styles["product-img"]}
-              src="https://i.postimg.cc/kX8PKZpq/ipad2.jpg"
-              alt="iPad Pro 12.9"
-            />
-            <div className={styles["product-info"]}>
-              <span className={styles["product-title"]}>iPad Pro 12.9</span>
-              <span className={styles["product-description"]}>Silver</span>
-              <div className={styles["product-price-block"]}>
-                <span className={styles["product-price"]}>900000</span>
-                <span className={styles["product-discount"]}>50% Off</span>
-              </div>
-              <div className={styles["product-tax-policy"]}>
-                Incluye impuesto País y percepción AFIP
-              </div>
-            </div>
-          </a>
-          <a className={styles["product-card"]} href="./details.html">
-            <img
-              className={styles["product-img"]}
-              src="https://i.postimg.cc/kX8PKZpq/ipad2.jpg"
-              alt="iPad Pro 12.9"
-            />
-            <div className={styles["product-info"]}>
-              <span className={styles["product-title"]}>iPad Pro 12.9</span>
-              <span className={styles["product-description"]}>Silver</span>
-              <div className={styles["product-price-block"]}>
-                <span className={styles["product-price"]}>900000</span>
-                <span className={styles["product-discount"]}>50% Off</span>
-              </div>
-              <div className={styles["product-tax-policy"]}>
-                Incluye impuesto País y percepción AFIP
-              </div>
-            </div>
-          </a>
-          <a className={styles["product-card"]} href="./details.html">
-            <img
-              className={styles["product-img"]}
-              src="https://i.postimg.cc/kX8PKZpq/ipad2.jpg"
-              alt="iPad Pro 12.9"
-            />
-            <div className={styles["product-info"]}>
-              <span className={styles["product-title"]}>iPad Pro 12.9</span>
-              <span className={styles["product-description"]}>Silver</span>
-              <div className={styles["product-price-block"]}>
-                <span className={styles["product-price"]}>900000</span>
-                <span className={styles["product-discount"]}>50% Off</span>
-              </div>
-              <div className={styles["product-tax-policy"]}>
-                Incluye impuesto País y percepción AFIP
-              </div>
-            </div>
-          </a>
-          <a className={styles["product-card"]} href="./details.html">
-            <img
-              className={styles["product-img"]}
-              src="https://i.postimg.cc/kX8PKZpq/ipad2.jpg"
-              alt="iPad Pro 12.9"
-            />
-            <div className={styles["product-info"]}>
-              <span className={styles["product-title"]}>iPad Pro 12.9</span>
-              <span className={styles["product-description"]}>Silver</span>
-              <div className={styles["product-price-block"]}>
-                <span className={styles["product-price"]}>900000</span>
-                <span className={styles["product-discount"]}>50% Off</span>
-              </div>
-              <div className={styles["product-tax-policy"]}>
-                Incluye impuesto País y percepción AFIP
-              </div>
-            </div>
-          </a>
-          <a className={styles["product-card"]} href="./details.html">
-            <img
-              className={styles["product-img"]}
-              src="https://i.postimg.cc/kX8PKZpq/ipad2.jpg"
-              alt="iPad Pro 12.9"
-            />
-            <div className={styles["product-info"]}>
-              <span className={styles["product-title"]}>iPad Pro 12.9</span>
-              <span className={styles["product-description"]}>Silver</span>
-              <div className={styles["product-price-block"]}>
-                <span className={styles["product-price"]}>900000</span>
-                <span className={styles["product-discount"]}>50% Off</span>
-              </div>
-              <div className={styles["product-tax-policy"]}>
-                Incluye impuesto País y percepción AFIP
-              </div>
-            </div>
-          </a>
-          <a className={styles["product-card"]} href="./details.html">
-            <img
-              className={styles["product-img"]}
-              src="https://i.postimg.cc/kX8PKZpq/ipad2.jpg"
-              alt="iPad Pro 12.9"
-            />
-            <div className={styles["product-info"]}>
-              <span className={styles["product-title"]}>iPad Pro 12.9</span>
-              <span className={styles["product-description"]}>Silver</span>
-              <div className={styles["product-price-block"]}>
-                <span className={styles["product-price"]}>900000</span>
-                <span className={styles["product-discount"]}>50% Off</span>
-              </div>
-              <div className={styles["product-tax-policy"]}>
-                Incluye impuesto País y percepción AFIP
-              </div>
-            </div>
-          </a>
+					{products.map((each) => (
+        <ProductCard
+          key={each.id}
+          id={each.id}
+          title={each.title}
+          price={each.price}
+          color={each.colors[0]}
+          image={each.images[0]}
+					/>
+        ))}
         </div>
       </main>
       <Footer />

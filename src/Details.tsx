@@ -2,8 +2,12 @@ import styles from "./Details.module.css";
 import Footer from "./components/Footer";
 import NavButton from "./components/NavButton";
 import Ofertas from "./components/Ofertas";
-import { Link } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
+import products from './assets/products';
 function Details() {
+	const { id } = useParams();
+	const product = products.find((each) => each.id === id);
+	if (!product) {
   return (
     <>
       <header>
@@ -75,14 +79,14 @@ function Details() {
               />
             </section>
             <div className={styles["product-description-block"]}>
-              <h1 className={styles["product-title"]}>MacBook Pro 13'4</h1>
+              <h1 className={styles["product-title"]}>{product.title}</h1>
               <form className={styles["product-selector"]}>
                 <fieldset className={styles["product-fieldset"]}>
                   <label className={styles["product-label"]} htmlFor="color">
                     Color
                   </label>
                   <select className={styles["product-select"]} id="color">
-                    <option value="Silver">Silver</option>
+                    {product.colors.map(each=><option value={each}>{each}</option>)}
                   </select>
                 </fieldset>
               </form>
@@ -148,7 +152,7 @@ function Details() {
       </main>
       <Footer />
     </>
-  );
+  );}
 }
 
 export default Details;
