@@ -3,7 +3,7 @@ import Hero from "./components/Hero";
 import NavBar from "./components/NavBar";
 import ProductCard from "./components/ProductCard";
 import Footer from "./components/Footer";
-import products from './assets/products';
+import products from "./assets/products";
 function Home() {
   return (
     <>
@@ -11,16 +11,16 @@ function Home() {
       <Hero first="tecnología" second="renovada" />
       <main>
         <div className={styles["product-container"]} id="products">
-					{products.map((each) => (
-        <ProductCard
-          key={each.id}
-          id={each.id}
-          title={each.title}
-          price={each.price}
-          color={each.colors[0]}
-          image={each.images[0]}
-					/>
-        ))}
+          {products.map((each, index) => (
+            <ProductCard
+              key={index}
+              id={each.id}
+              title={each.title}
+              price={each.price}
+              color={each.colors[0]}
+              image={each.images[0]}
+            />
+          ))}
         </div>
       </main>
       <Footer />
