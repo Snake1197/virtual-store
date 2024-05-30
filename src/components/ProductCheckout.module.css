@@ -56,6 +56,15 @@
   height: 40px;
   border-radius: 10px;
 }
+.remove-btn {
+  width: 100%;
+  background: #202020;
+  color: white;
+  font-weight: bold;
+  border: none;
+  height: 40px;
+  border-radius: 10px;
+}
 .cart-btn:hover {
   background: #ff5151;
 }

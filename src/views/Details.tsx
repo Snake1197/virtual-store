@@ -23,7 +23,7 @@ function Details() {
                 colors={product.colors}
                 description={product.description}
               />
-              <ProductCheckout price={product.price} />
+              <ProductCheckout product={product} />
             </div>
             <Ofertas />
           </div>

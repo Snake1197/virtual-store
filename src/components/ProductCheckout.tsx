@@ -1,19 +1,45 @@
 import styles from "./ProductCheckout.module.css";
 import { useState } from "react";
 
+interface Product {
+	id: string;
+	price: number;
+}
 interface ProductCheckoutProp {
-  price: number;
+	product: Product;
 }
 
-function ProductCheckout({ price }: ProductCheckoutProp) {
+function ProductCheckout({product}: ProductCheckoutProp) {
+	//Manejo de estados para la cantidad de productos
 	const [quantity, setQuantity] = useState(1);
+
+	//Manejo de estados para los estilos del botón "Añadir al carrito"
+	const [button, setButton] = useState(false);
+	
+	//Lógica para setear el LocalStorage el array de productos del carrito
+	const manageCart = () => {
+		const storedProducts = localStorage.getItem("cart");
+		let productsInStorage: Product[] = storedProducts ? JSON.parse(storedProducts) : [];
+		
+		const one = productsInStorage.find(each => each.id === product.id);
+		if (!one) {
+			productsInStorage.push(product);
+			setButton(true);
+		} 
+		else {
+			productsInStorage = productsInStorage.filter(each => each.id !== product.id);
+			setButton(false);
+		}
+	localStorage.setItem("cart", JSON.stringify(productsInStorage));
+	};
+
   return (
     <>
       <div className={styles["product-checkout-block"]}>
         <div className={styles["checkout-container"]}>
           <span className={styles["checkout-total-label"]}>Total:</span>
           <h2 id="price" className={styles["checkout-total-price"]}>
-            ${(price * quantity).toLocaleString()}
+            ${(product.price * quantity).toLocaleString()}
           </h2>
           <p className={styles["checkout-description"]}>
             Incluye impuesto PAIS y percepción AFIP. Podés recuperar AR$ 50711
@@ -41,8 +67,8 @@ function ProductCheckout({ price }: ProductCheckoutProp) {
           <div className={styles["checkout-process"]}>
             <div className={styles["top"]}>
               <input type="number" min="1" defaultValue={quantity} onChange={(event) => setQuantity(Number(event?.target.value))}/>
-              <button type="button" className={styles["cart-btn"]}>
-                Añadir al Carrito
+              <button type="button" className={button ? styles["remove-btn"] : styles["cart-btn"]} onClick={manageCart}>
+                {button ? "Remove from cart" : "Add to cart"}
               </button>
             </div>
           </div>
