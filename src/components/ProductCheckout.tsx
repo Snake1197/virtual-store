@@ -1,17 +1,19 @@
 import styles from "./ProductCheckout.module.css";
+import { useState } from "react";
 
 interface ProductCheckoutProp {
   price: number;
 }
 
 function ProductCheckout({ price }: ProductCheckoutProp) {
+	const [quantity, setQuantity] = useState(1);
   return (
     <>
       <div className={styles["product-checkout-block"]}>
         <div className={styles["checkout-container"]}>
           <span className={styles["checkout-total-label"]}>Total:</span>
           <h2 id="price" className={styles["checkout-total-price"]}>
-            {price}
+            ${(price * quantity).toLocaleString()}
           </h2>
           <p className={styles["checkout-description"]}>
             Incluye impuesto PAIS y percepción AFIP. Podés recuperar AR$ 50711
@@ -38,7 +40,7 @@ function ProductCheckout({ price }: ProductCheckoutProp) {
           </ul>
           <div className={styles["checkout-process"]}>
             <div className={styles["top"]}>
-              <input type="number" min="1" defaultValue="1" />
+              <input type="number" min="1" defaultValue={quantity} onChange={(event) => setQuantity(Number(event?.target.value))}/>
               <button type="button" className={styles["cart-btn"]}>
                 Añadir al Carrito
               </button>
