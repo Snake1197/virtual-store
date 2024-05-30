@@ -1,7 +1,7 @@
-import NotFound from "./NotFound";
-import Cart from "./Cart";
-import Home from "./Home";
-import Details from "./Details";
+import NotFound from "./views/NotFound";
+import Cart from "./views/Cart";
+import Home from "./views/Home";
+import Details from "./views/Details";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([

@@ -1,10 +1,10 @@
 import styles from "./NotFound.module.css";
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
+import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 function NotFound() {
   return (
     <>
-      <NavBar />
+      <NavBar search={false} />
       <main>
         <section className={styles["hero"]}>
           <h2>404 Not Found</h2>
