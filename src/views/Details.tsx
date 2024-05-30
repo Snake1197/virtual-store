@@ -8,6 +8,8 @@ import Ofertas from "../components/Ofertas";
 import { useParams } from "react-router-dom";
 import products from "../assets/products";
 function Details() {
+	document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
   const { id } = useParams();
   const product = products.find((each) => each.id === id);
   if (product) {
@@ -17,13 +19,9 @@ function Details() {
         <main>
           <div className={styles["details-container"]}>
             <div id="details" className={styles["columns-container"]}>
-              <ImagesProductDetails images={product.images} />
-              <ProductDescriptionDetail
-                title={product.title}
-                colors={product.colors}
-                description={product.description}
-              />
-              <ProductCheckout product={product} />
+              <ImagesProductDetails product={product}/>
+              <ProductDescriptionDetail product={product}/>
+              <ProductCheckout product={product}/>
             </div>
             <Ofertas />
           </div>

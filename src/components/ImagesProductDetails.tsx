@@ -1,15 +1,19 @@
 import styles from "./ImagesProductDetails.module.css";
 
-interface ImagesProductDetailsProp {
+interface Product {
   images: string[];
 }
 
-function ImagesProductDetails({ images }: ImagesProductDetailsProp) {
+interface ImagesProductDetailsProp{
+	product: Product
+}
+
+function ImagesProductDetails({ product }: ImagesProductDetailsProp) {
   return (
     <>
       <section className={styles["product-images-block"]}>
         <div className={styles["product-images"]}>
-          {images.map(
+          {product.images.map(
             (each, index) =>
               index > 0 && (
                 <img
@@ -24,7 +28,7 @@ function ImagesProductDetails({ images }: ImagesProductDetailsProp) {
         <img
           className={styles["big-img"]}
           id="big-img"
-          src={images[0]}
+          src={product.images[0]}
           alt="MacBook Pro 13'4"
         />
       </section>

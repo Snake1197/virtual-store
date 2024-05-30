@@ -1,20 +1,20 @@
 import styles from "./ProductDescriptionDetail.module.css";
 
-interface ProductDescriptionDetailProp {
+interface Product {
   title: string;
   colors: string[];
   description: string;
 }
 
-function ProductDescriptionDetail({
-  title,
-  colors,
-  description,
-}: ProductDescriptionDetailProp) {
+interface ProductDescriptionDetailProp{
+	product: Product
+}
+
+function ProductDescriptionDetail({product}: ProductDescriptionDetailProp) {
   return (
     <>
       <div className={styles["product-description-block"]}>
-        <h1 className={styles["product-title"]}>{title}</h1>
+        <h1 className={styles["product-title"]}>{product.title}</h1>
         <form className={styles["product-selector"]}>
           <fieldset className={styles["product-fieldset"]}>
             <label className={styles["product-label"]} htmlFor="color">
@@ -23,9 +23,9 @@ function ProductDescriptionDetail({
             <select
               className={styles["product-select"]}
               id="color"
-              defaultValue={colors[0]}
+              defaultValue={product.colors[0]}
             >
-              {colors.map((each, index) => (
+              {product.colors.map((each, index) => (
                 <option key={index} value={each}>
                   {each}
                 </option>
@@ -35,7 +35,7 @@ function ProductDescriptionDetail({
         </form>
         <div className={styles["product-description"]}>
           <span className={styles["product-label"]}>Descripción</span>
-          <p>{description}</p>
+          <p>{product.description}</p>
         </div>
       </div>
     </>
