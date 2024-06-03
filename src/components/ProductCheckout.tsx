@@ -1,5 +1,5 @@
 import styles from "./ProductCheckout.module.css";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 interface Product {
   id: string;
@@ -19,14 +19,33 @@ function ProductCheckout({ product }: ProductCheckoutProp) {
 
   //Manejo de estados para los estilos del botón "Añadir al carrito"
   const [button, setButton] = useState(false);
-
-  //Lógica para setear el LocalStorage el array de productos del carrito
-  const manageCart = () => {
-    const storedProducts = localStorage.getItem("cart");
+const storedProducts = localStorage.getItem("cart");
     let productsInStorage: Product[] = storedProducts
       ? JSON.parse(storedProducts)
       : [];
+	//
+	useEffect(() => {
+	let productsOnCart : Product[] = [];
+	if (storedProducts) {
+		productsOnCart = storedProducts
+      ? JSON.parse(storedProducts)
+      : [];
+	} else {
+		localStorage.setItem("cart", JSON.stringify([]));
+	}
+	const one = productsOnCart.find((item) => item.id === product.id);
+	if (one) {
+		setQuantity(one.units);
+		setButton(true);
+	} else {
+		setQuantity(1);
+		setButton(false);
+	}
+	}, [product.id,storedProducts]);
 
+
+  //Lógica para setear el LocalStorage el array de productos del carrito
+  const manageCart = () => {
     const one = productsInStorage.find((each) => each.id === product.id);
     if (!one) {
       product.units = quantity;
