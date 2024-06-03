@@ -1,37 +1,48 @@
 import styles from "./ProductCheckout.module.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 interface Product {
-	id: string;
-	price: number;
+  id: string;
+  price: number;
 }
 interface ProductCheckoutProp {
-	product: Product;
+  product: Product;
 }
 
-function ProductCheckout({product}: ProductCheckoutProp) {
-	//Manejo de estados para la cantidad de productos
-	const [quantity, setQuantity] = useState(1);
+function ProductCheckout({ product }: ProductCheckoutProp) {
+  const units = useRef<HTMLInputElement>(null);
+  //Manejo de estados para la cantidad de productos
+  const [quantity, setQuantity] = useState(1);
 
-	//Manejo de estados para los estilos del botón "Añadir al carrito"
-	const [button, setButton] = useState(false);
-	
-	//Lógica para setear el LocalStorage el array de productos del carrito
-	const manageCart = () => {
-		const storedProducts = localStorage.getItem("cart");
-		let productsInStorage: Product[] = storedProducts ? JSON.parse(storedProducts) : [];
-		
-		const one = productsInStorage.find(each => each.id === product.id);
-		if (!one) {
-			productsInStorage.push(product);
-			setButton(true);
-		} 
-		else {
-			productsInStorage = productsInStorage.filter(each => each.id !== product.id);
-			setButton(false);
-		}
-	localStorage.setItem("cart", JSON.stringify(productsInStorage));
-	};
+  //Manejo de estados para los estilos del botón "Añadir al carrito"
+  const [button, setButton] = useState(false);
+
+  //Lógica para setear el LocalStorage el array de productos del carrito
+  const manageCart = () => {
+    const storedProducts = localStorage.getItem("cart");
+    let productsInStorage: Product[] = storedProducts
+      ? JSON.parse(storedProducts)
+      : [];
+
+    const one = productsInStorage.find((each) => each.id === product.id);
+    if (!one) {
+      const productToAdd = { ...product, units: quantity };
+      productsInStorage.push(productToAdd);
+      setButton(true);
+    } else {
+      productsInStorage = productsInStorage.filter(
+        (each) => each.id !== product.id
+      );
+      setButton(false);
+    }
+    localStorage.setItem("cart", JSON.stringify(productsInStorage));
+  };
+
+  const handleChange = () => {
+    if (units.current) {
+      setQuantity(Number(units.current.value));
+    }
+  };
 
   return (
     <>
@@ -66,8 +77,18 @@ function ProductCheckout({product}: ProductCheckoutProp) {
           </ul>
           <div className={styles["checkout-process"]}>
             <div className={styles["top"]}>
-              <input type="number" min="1" defaultValue={quantity} onChange={(event) => setQuantity(Number(event?.target.value))}/>
-              <button type="button" className={button ? styles["remove-btn"] : styles["cart-btn"]} onClick={manageCart}>
+              <input
+                type="number"
+                min="1"
+                ref={units}
+                defaultValue={quantity}
+                onChange={handleChange}
+              />
+              <button
+                type="button"
+                className={button ? styles["remove-btn"] : styles["cart-btn"]}
+                onClick={manageCart}
+              >
                 {button ? "Remove from cart" : "Add to cart"}
               </button>
             </div>
