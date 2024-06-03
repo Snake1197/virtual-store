@@ -1,6 +1,8 @@
 import styles from "./ImagesProductDetails.module.css";
+import { useState, useEffect } from "react";
 
 interface Product {
+	title: string;
   images: string[];
 }
 
@@ -9,18 +11,24 @@ interface ImagesProductDetailsProp{
 }
 
 function ImagesProductDetails({ product }: ImagesProductDetailsProp) {
+	const [thumb, setThumb] = useState(product.images[0] || "/mock1.jpg");
+
+	useEffect(() => {
+    setThumb(product.images[0] || "/mock1.jpg");
+  }, [product]);
   return (
     <>
       <section className={styles["product-images-block"]}>
         <div className={styles["product-images"]}>
           {product.images.map(
             (each, index) =>
-              index > 0 && (
+              (
                 <img
                   key={index}
                   className={styles["mini-img"]}
                   src={each}
-                  alt="MacBook Pro 13'4"
+                  alt={product.title}
+									onClick={() => setThumb(each)}
                 />
               )
           )}
@@ -28,8 +36,8 @@ function ImagesProductDetails({ product }: ImagesProductDetailsProp) {
         <img
           className={styles["big-img"]}
           id="big-img"
-          src={product.images[0]}
-          alt="MacBook Pro 13'4"
+          src={thumb}
+          alt={product.title}
         />
       </section>
     </>
