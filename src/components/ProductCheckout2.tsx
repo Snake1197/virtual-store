@@ -20,20 +20,15 @@ function ProductCheckout({ product }: ProductCheckoutProp) {
 
   //Manejo de estados para los estilos del botón "Añadir al carrito"
   const [button, setButton] = useState(false);
-  const storedProducts = localStorage.getItem("cart");
 
-  let productsInStorage: Product[] = storedProducts
-    ? JSON.parse(storedProducts)
-    : [];
-  //
   useEffect(() => {
-    let productsOnCart: Product[] = [];
-    if (storedProducts) {
-      productsOnCart = storedProducts ? JSON.parse(storedProducts) : [];
-    } else {
-      localStorage.setItem("cart", JSON.stringify([]));
-    }
-    const one = productsOnCart.find((item) => item.id === product.id);
+    const storedProducts = localStorage.getItem("cart");
+
+    const productsInStorage: Product[] = storedProducts
+      ? JSON.parse(storedProducts)
+      : [];
+
+    const one = productsInStorage.find((item) => item.id === product.id);
     if (one) {
       setButton(true);
       updatePrice(one.units * product.price);
@@ -42,12 +37,21 @@ function ProductCheckout({ product }: ProductCheckoutProp) {
       setButton(false);
       updatePrice(product.price);
     }
-  }, [product.id, storedProducts, product.price]);
+  }, [product.id, product.price]);
 
   //Lógica para setear el LocalStorage el array de productos del carrito
   const manageCart = () => {
-    const one = productsInStorage.find((each) => each.id === product.id);
-    if (!one) {
+    const storedProducts = localStorage.getItem("cart");
+
+    const productsInStorage: Product[] = storedProducts
+      ? JSON.parse(storedProducts)
+      : [];
+    //
+
+    const productIndex = productsInStorage.findIndex(
+      (each) => each.id === product.id
+    );
+    if (productIndex === -1) {
       const newProduct = {
         ...product,
         units: quantity,
@@ -56,9 +60,7 @@ function ProductCheckout({ product }: ProductCheckoutProp) {
       productsInStorage.push(newProduct);
       setButton(true);
     } else {
-      productsInStorage = productsInStorage.filter(
-        (each) => each.id !== product.id
-      );
+      productsInStorage.splice(productIndex, 1);
       setQuantity(1);
       updatePrice(product.price);
       setButton(false);
@@ -66,6 +68,13 @@ function ProductCheckout({ product }: ProductCheckoutProp) {
     localStorage.setItem("cart", JSON.stringify(productsInStorage));
   };
 
+  const handleQuantityChange = () => {
+    if (units.current) {
+      const newQuantity = Number(units.current.value);
+      setQuantity(newQuantity);
+      updatePrice(newQuantity * product.price);
+    }
+  };
   return (
     <>
       <div className={styles["product-checkout-block"]}>
@@ -103,19 +112,9 @@ function ProductCheckout({ product }: ProductCheckoutProp) {
                 type="number"
                 min="1"
                 ref={units}
-                value={
-                  button
-                    ? productsInStorage.find((item) => item.id === product.id)
-                        ?.units
-                    : quantity
-                } //Para que se renderice correctamente el valor
+                defaultValue={quantity}
                 //Comprobación de units.current para evitar la alerte de que puede ser null
-                onChange={() => {
-                  if (units.current) {
-                    setQuantity(Number(units.current.value));
-                    updatePrice(Number(units.current.value) * product.price);
-                  }
-                }}
+                onChange={handleQuantityChange}
               />
               <button
                 type="button"
