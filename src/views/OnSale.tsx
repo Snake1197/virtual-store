@@ -1,14 +1,12 @@
 import styles from "../App.module.css";
-import Hero from "../components/Hero";
 import NavBar from "../components/NavBar";
-import OnSaleCard from "../components/OnSaleCard";
 import Footer from "../components/Footer";
 import products from "../assets/products";
-function Home() {
+import OnSaleCard from "../components/OnSaleCard";
+function OnSale() {
   return (
     <>
       <NavBar search={true} />
-      <Hero first="tecnología" second="renovada" />
       <main>
         <div className={styles["product-container"]} id="products">
           {products.map((each, index) => (
@@ -17,7 +15,6 @@ function Home() {
               id={each.id}
               title={each.title}
               price={each.price}
-              color={each.colors[0]}
               image={each.images[0]}
             />
           ))}
@@ -28,4 +25,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default OnSale;

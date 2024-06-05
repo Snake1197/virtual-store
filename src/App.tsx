@@ -3,6 +3,7 @@ import Cart from "./views/Cart";
 import Home from "./views/Home";
 import Details from "./views/Details";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import OnSale from "./views/OnSale";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
   {
     path: "/cart",
     element: <Cart />,
+  },
+  {
+    path: "/onsale",
+    element: <OnSale />,
   },
   {
     path: "/*",
