@@ -1,4 +1,3 @@
-import styles from "../App.module.css";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import products from "../assets/products";
@@ -30,7 +29,10 @@ function OnSale() {
       <NavBar search={true} />
       <main>
         <a onClick={prevPage}>◀️</a>
-        <div className={styles["product-container"]} id="products">
+        <div
+          className="w-full h-[50px] bg-purple-800 text-white text-center"
+          id="products"
+        >
           {visibleProducts.map((each, index) => (
             <OnSaleCard
               key={index}

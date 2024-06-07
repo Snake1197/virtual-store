@@ -1,4 +1,3 @@
-import styles from "../App.module.css";
 import Hero from "../components/Hero";
 import NavBar from "../components/NavBar";
 import ProductCard from "../components/ProductCard";
@@ -10,7 +9,10 @@ function Home() {
       <NavBar search={true} />
       <Hero first="tecnología" second="renovada" />
       <main>
-        <div className={styles["product-container"]} id="products">
+        <div
+          className="w-[1080px] flex flex-wrap justify-between"
+          id="products"
+        >
           {products.map((each, index) => (
             <ProductCard
               key={index}

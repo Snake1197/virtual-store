@@ -7,7 +7,10 @@ function Ofertas() {
     <>
       <div className={styles["sales-block"]}>
         <h2 className={styles["sales-title"]}>Ofertas de la semana</h2>
-        <div id="product-container" className={styles["product-container"]}>
+        <div
+          id="product-container"
+          className="w-full h-[50px] bg-purple-800 text-white text-center"
+        >
           {onsale.map((each, index) => (
             <ProductCard
               key={index}

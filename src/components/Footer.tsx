@@ -1,97 +1,99 @@
-import styles from "./Footer.module.css";
-
 function Footer() {
   return (
     <>
-      <footer>
-        <div id="footer" className={styles["footer-container"]}>
-          <ul className={styles["footer-ul"]}>
-            <li className={styles["footer-main-item"]}>
-              <a className={styles["footer-a"]} href="/onsale">
+      <footer className="min-h-64 bg-[#7525a7] flex flex-col items-center">
+        <div id="footer" className="w-[1080px] flex justify-between p-[10px]">
+          <ul className="list-none w-[170px] p-[10px]">
+            <li className="font-bold pb-[20px]">
+              <a className="text-white no-underline" href="/onsale">
                 Ofertas
               </a>
             </li>
-            <li className={styles["footer-li"]}>
-              <a className={styles["footer-a"]} href="/">
+            <li className="py-[5px]">
+              <a className="text-white no-underline" href="/">
                 Laptops
               </a>
             </li>
-            <li className={styles["footer-li"]}>
-              <a className={styles["footer-a"]} href="/">
+            <li className="py-[5px]">
+              <a className="text-white no-underline" href="/">
                 Audio
               </a>
             </li>
-            <li className={styles["footer-li"]}>
-              <a className={styles["footer-a"]} href="/">
+            <li className="py-[5px]">
+              <a className="text-white no-underline" href="/">
                 Auriculares
               </a>
             </li>
           </ul>
-          <ul className={styles["footer-ul"]}>
-            <li className={styles["footer-main-item"]}>
-              <a className={styles["footer-a"]} href="/">
+          <ul className="list-none w-[170px] p-[10px]">
+            <li className="font-bold pb-[20px]">
+              <a className="text-white no-underline" href="/">
                 Cómo comprar
               </a>
             </li>
-            <li className={styles["footer-li"]}>
-              <a className={styles["footer-a"]} href="/">
+            <li className="py-[5px]">
+              <a className="text-white no-underline" href="/">
                 Formas de pago
               </a>
             </li>
-            <li className={styles["footer-li"]}>
-              <a className={styles["footer-a"]} href="/">
+            <li className="py-[5px]">
+              <a className="text-white no-underline" href="/">
                 Envios
               </a>
             </li>
-            <li className={styles["footer-li"]}>
-              <a className={styles["footer-a"]} href="/">
+            <li className="py-[5px]">
+              <a className="text-white no-underline" href="/">
                 Devoluciones
               </a>
             </li>
           </ul>
-          <ul className={styles["footer-ul"]}>
-            <li className={styles["footer-main-item"]}>
-              <a className={styles["footer-a"]} href="/">
+          <ul className="list-none w-[170px] p-[10px]">
+            <li className="font-bold pb-[20px]">
+              <a className="text-white no-underline" href="/">
                 Costos y tarifas
               </a>
             </li>
-            <li className={styles["footer-li"]}>
-              <a className={styles["footer-a"]} href="/">
+            <li className="py-[5px]">
+              <a className="text-white no-underline" href="/">
                 Impuestos
               </a>
             </li>
-            <li className={styles["footer-li"]}>
-              <a className={styles["footer-a"]} href="/">
+            <li className="py-[5px]">
+              <a className="text-white no-underline" href="/">
                 Facturación
               </a>
             </li>
           </ul>
-          <ul className={styles["footer-ul"]}>
-            <li className={styles["footer-main-item"]}>
-              <a className={styles["footer-a"]} href="/">
+          <ul className="list-none w-[170px] p-[10px]">
+            <li className="font-bold pb-[20px]">
+              <a className="text-white no-underline" href="/">
                 Mis pedidos
               </a>
             </li>
-            <li className={styles["footer-li"]}>
-              <a className={styles["footer-a"]} href="/">
+            <li className="py-[5px]">
+              <a className="text-white no-underline" href="/">
                 Pedir nuevamente
               </a>
             </li>
-            <li className={styles["footer-li"]}>
-              <a className={styles["footer-a"]} href="/">
+            <li className="py-[5px]">
+              <a className="text-white no-underline" href="/">
                 Lista de deseos
               </a>
             </li>
           </ul>
-          <ul className={styles["footer-ul"]}>
-            <li className={styles["footer-main-item"]}>
-              <a className={styles["footer-a"]} href="/">
+          <ul className="list-none w-[170px] p-[10px]">
+            <li className="font-bold pb-[20px]">
+              <a className="text-white no-underline" href="/">
                 Garantía
               </a>
             </li>
           </ul>
         </div>
-        <div className={styles["footer-copyright"]}>
+        <div
+          className="w-[1080px] border-t border-[#ba53fb] text-center text-white font-bold py-[30px] Class
+Properties
+box-border"
+        >
           Curso de HTML + CSS 2023
         </div>
       </footer>
