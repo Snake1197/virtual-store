@@ -10,17 +10,20 @@ function NavBar({ search }: NavBarProp) {
   if (search) {
     return (
       <>
-        <header>
-          <div className={styles["header-container"]}>
-            <Link to="/" className={styles["header-logo"]}>
+        <header className="w-full h-36 bg-[#ff3b3c] px-5 pt-5 pb-0 flex flex-col items-center">
+          <div className="w-[1080px] flex justify-between items-center grow">
+            <Link
+              to="/"
+              className="w-2/6 flex items-center grow justify-start h-12"
+            >
               <img
-                className={styles["header-logo-img"]}
+                className="h-12"
                 src="/tiendamia-logo.svg"
                 width="218"
                 alt="Logo store"
               />
             </Link>
-            <form className={styles["header-form"]}>
+            <form className="w-2/6 flex items-center grow justify-center">
               <input
                 className={styles["header-input"]}
                 type="text"
@@ -28,8 +31,8 @@ function NavBar({ search }: NavBarProp) {
                 id="search"
               />
             </form>
-            <ul className={styles["header-social"]}>
-              <li id="facebook" className={styles["header-li"]}>
+            <ul className="w-2/6 flex items-center grow justify-end list-none">
+              <li id="facebook" className="h-12 w-12">
                 <Link className={styles["header-a"]} to="https://facebook.com">
                   <img
                     className={styles["header-social-img"]}
@@ -37,7 +40,7 @@ function NavBar({ search }: NavBarProp) {
                   />
                 </Link>
               </li>
-              <li id="instagram" className={styles["header-li"]}>
+              <li id="instagram" className="h-12 w-12">
                 <Link className={styles["header-a"]} to="https://instagram.com">
                   <img
                     className={styles["header-social-img"]}
@@ -45,7 +48,7 @@ function NavBar({ search }: NavBarProp) {
                   />
                 </Link>
               </li>
-              <li id="cart" className={styles["header-li"]}>
+              <li id="cart" className="h-12 w-12">
                 <Link className={styles["header-a"]} to="/cart">
                   <img
                     className={styles["header-social-img"]}
@@ -68,18 +71,21 @@ function NavBar({ search }: NavBarProp) {
   }
   return (
     <>
-      <header>
-        <div className={styles["header-container"]}>
-          <Link to="/" className={styles["header-logo"]}>
+      <header className="w-full h-36 bg-[#ff3b3c] px-5 pt-5 pb-0 flex flex-col items-center">
+        <div className="w-[1080px] flex justify-between items-center grow">
+          <Link
+            to="/"
+            className="w-2/6 flex items-center grow justify-start h-12"
+          >
             <img
-              className={styles["header-logo-img"]}
+              className="h-12"
               src="/tiendamia-logo.svg"
               width="218"
               alt="Logo store"
             />
           </Link>
-          <ul className={styles["header-social"]}>
-            <li id="facebook" className={styles["header-li"]}>
+          <ul className="w-2/6 flex items-center grow justify-end list-none">
+            <li id="facebook" className="h-12 w-12">
               <Link className={styles["header-a"]} to="https://facebook.com">
                 <img
                   className={styles["header-social-img"]}
@@ -87,7 +93,7 @@ function NavBar({ search }: NavBarProp) {
                 />
               </Link>
             </li>
-            <li id="instagram" className={styles["header-li"]}>
+            <li id="instagram" className="h-12 w-12">
               <Link className={styles["header-a"]} to="https://instagram.com">
                 <img
                   className={styles["header-social-img"]}
@@ -95,7 +101,7 @@ function NavBar({ search }: NavBarProp) {
                 />
               </Link>
             </li>
-            <li id="cart" className={styles["header-li"]}>
+            <li id="cart" className="h-12 w-12">
               <Link className={styles["header-a"]} to="/cart">
                 <img
                   className={styles["header-social-img"]}

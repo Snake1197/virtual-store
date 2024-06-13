@@ -2,7 +2,13 @@ function Footer() {
   return (
     <>
       <footer className="min-h-64 bg-[#7525a7] flex flex-col items-center">
-        <div id="footer" className="w-[1080px] flex justify-between p-[10px]">
+        <div
+          id="footer"
+          className="
+         flex-wrap flex w-full justify-around p-[10px]
+        md:w-[1080px] md:justify-between md:items-left
+        "
+        >
           <ul className="list-none w-[170px] p-[10px]">
             <li className="font-bold pb-[20px]">
               <a className="text-white no-underline" href="/onsale">
@@ -90,9 +96,9 @@ function Footer() {
           </ul>
         </div>
         <div
-          className="w-[1080px] border-t border-[#ba53fb] text-center text-white font-bold py-[30px] Class
-Properties
-box-border"
+          className="
+          w-full
+          md:w-[1080px] border-t border-[#ba53fb] text-center text-white font-bold py-[30px] box-border"
         >
           Curso de HTML + CSS 2023
         </div>
