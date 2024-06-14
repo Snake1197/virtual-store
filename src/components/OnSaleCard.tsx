@@ -1,18 +1,12 @@
 import styles from "./OnSaleCard.module.css";
 import { Link } from "react-router-dom";
+import Product from "../interfaces/Product";
 
-interface ProductData {
-  id: string;
-  title: string;
-  price: number;
-  image: string;
-}
-
-function OnSaleCard({ id, title, price, image }: ProductData) {
+function OnSaleCard({ id, title, price, images }: Product) {
   return (
     <>
       <Link key={id} className={styles["product-card"]} to={"/details/" + id}>
-        <img className={styles["product-img"]} src={image} alt={id} />
+        <img className={styles["product-img"]} src={images[0]} alt={id} />
         <div className={styles["product-info"]}>
           <span className={styles["product-title"]}>{title}</span>
           <span className={styles["label-price-before"]}>Desde </span>

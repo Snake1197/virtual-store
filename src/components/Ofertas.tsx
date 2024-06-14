@@ -17,8 +17,8 @@ function Ofertas() {
               id={each.id}
               title={each.title}
               price={each.price}
-              color={each.colors[0]}
-              image={each.images[0]}
+              colors={each.colors}
+              images={each.images}
             />
           ))}
         </div>

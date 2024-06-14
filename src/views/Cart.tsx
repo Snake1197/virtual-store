@@ -4,6 +4,8 @@ import Hero from "../components/Hero";
 import CartCard from "../components/CartCard";
 import CartResume from "../components/CartResume";
 import { useState, useEffect } from "react";
+import Product from "../interfaces/Product";
+
 function Cart() {
   //Inicializo el useState con lo encuentre en el storage, o en su defecto vacío.
   const [productsOnCart, setProductsOnCart] = useState(() => {
@@ -24,16 +26,16 @@ function Cart() {
       <Hero first="mi" second="carrito" />
       <main>
         <section className="flex flex-col">
-          {productsOnCart.map((each, index: number) => (
+          {productsOnCart.map((each: Product, index: number) => (
             <CartCard
               key={index}
               id={each.id}
               name={each.title}
               image={each.images[0]}
-              description={each.description}
+              description={each.description ? each.description : "Undefined"}
               price={each.price}
-              quantity={each.units}
-              color={each.colors[0]}
+              quantity={each.units ? each.units : 0}
+              color={each.colors ? each.colors[0] : "Undefined"}
             />
           ))}
         </section>

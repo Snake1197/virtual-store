@@ -3,6 +3,8 @@ import NavBar from "../components/NavBar";
 import ProductCard from "../components/ProductCard";
 import Footer from "../components/Footer";
 import products from "../assets/products";
+import Product from "../interfaces/Product";
+
 function Home() {
   return (
     <>
@@ -13,14 +15,14 @@ function Home() {
           className="w-[1080px] flex flex-wrap justify-between"
           id="products"
         >
-          {products.map((each, index) => (
+          {products.map((each: Product, index: number) => (
             <ProductCard
               key={index}
               id={each.id}
               title={each.title}
               price={each.price}
-              color={each.colors[0]}
-              image={each.images[0]}
+              colors={each.colors}
+              images={each.images}
             />
           ))}
         </div>

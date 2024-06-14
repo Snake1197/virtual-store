@@ -20,6 +20,7 @@ function CartCard({
   quantity,
 }: dataProduct) {
   const units = useRef<HTMLInputElement>(null);
+
   const manageUnits = () => {
     const productsOnCart = JSON.parse(localStorage.getItem("cart") || "[]");
     const one = productsOnCart.find((each: dataProduct) => each.id === id);
@@ -61,7 +62,7 @@ function CartCard({
               defaultValue={quantity}
               ref={units}
               onChange={manageUnits}
-              min="1"
+              min="0"
               id={id}
             />
           </div>

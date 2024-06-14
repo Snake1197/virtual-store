@@ -39,7 +39,7 @@ function OnSale() {
               id={each.id}
               title={each.title}
               price={each.price}
-              image={each.images[0]}
+              images={each.images}
             />
           ))}
         </div>
