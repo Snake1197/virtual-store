@@ -6,15 +6,29 @@ import ProductDescriptionDetail from "../components/ProductDescriptionDetail";
 import ProductCheckout from "../components/ProductCheckout";
 import Ofertas from "../components/Ofertas";
 import { useParams } from "react-router-dom";
-import products from "../assets/products";
 import Product from "../interfaces/Product";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 function Details() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
   const { id } = useParams();
-  const product = products.find((each: Product) => each.id === id);
-  if (product) {
+
+  const [product, setProduct] = useState<Product | null>(null);
+
+  useEffect(() => {
+    axios("/products.json")
+      .then((res) => {
+        const products: Array<Product> = res.data;
+        const detailProduct = products.find((each) => each.id === id);
+        setProduct(detailProduct || null);
+      })
+      .catch((err) => console.log(err));
+  }, [id]);
+
+  /*   const product = products.find((each: Product) => each.id === id);
+   */ if (product) {
     return (
       <>
         <NavBar search={false} />

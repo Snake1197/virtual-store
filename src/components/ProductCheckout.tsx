@@ -1,17 +1,9 @@
 import styles from "./ProductCheckout.module.css";
 import { useState, useRef, useEffect } from "react";
+import Product from "../interfaces/Product";
+import ProductProp from "../interfaces/ProductProp";
 
-interface Product {
-  id: string;
-  price: number;
-  //Adición de propiedad para ser utilizada
-  units: number;
-}
-interface ProductCheckoutProp {
-  product: Product;
-}
-
-function ProductCheckout({ product }: ProductCheckoutProp) {
+function ProductCheckout({ product }: ProductProp) {
   //Inicialización correcta de useRef
   const units = useRef<HTMLInputElement>(null);
   //Manejo de estados para la cantidad de productos
@@ -36,7 +28,7 @@ function ProductCheckout({ product }: ProductCheckoutProp) {
     const one = productsOnCart.find((item) => item.id === product.id);
     if (one) {
       setButton(true);
-      updatePrice(one.units * product.price);
+      updatePrice(one.units ? one.units : 0 * product.price);
     } else {
       setQuantity(1);
       setButton(false);

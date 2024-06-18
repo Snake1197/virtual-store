@@ -7,4 +7,5 @@ export default interface Product {
   images: string[];
   colors?: string[];
   units?: number;
+  onsale?: number;
 }

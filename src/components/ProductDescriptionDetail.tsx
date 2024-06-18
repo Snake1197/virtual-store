@@ -1,16 +1,7 @@
 import styles from "./ProductDescriptionDetail.module.css";
+import Product from "../interfaces/ProductProp";
 
-interface Product {
-  title: string;
-  colors: string[];
-  description: string;
-}
-
-interface ProductDescriptionDetailProp{
-	product: Product
-}
-
-function ProductDescriptionDetail({product}: ProductDescriptionDetailProp) {
+function ProductDescriptionDetail({ product }: Product) {
   return (
     <>
       <div className={styles["product-description-block"]}>
@@ -23,9 +14,9 @@ function ProductDescriptionDetail({product}: ProductDescriptionDetailProp) {
             <select
               className={styles["product-select"]}
               id="color"
-              defaultValue={product.colors[0]}
+              defaultValue={product.colors ? product.colors[0] : "Undefined"}
             >
-              {product.colors.map((each, index) => (
+              {product.colors?.map((each, index) => (
                 <option key={index} value={each}>
                   {each}
                 </option>
