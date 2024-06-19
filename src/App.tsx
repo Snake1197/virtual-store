@@ -4,6 +4,8 @@ import Home from "./views/Home";
 import Details from "./views/Details";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import OnSale from "./views/OnSale";
+import { Provider } from "react-redux";
+import store from "./store";
 
 const router = createBrowserRouter([
   {
@@ -29,7 +31,10 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return;
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>;
 }
 
 export default App;
