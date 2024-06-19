@@ -1,11 +1,23 @@
 import NavButton from "./NavButton";
 import { Link } from "react-router-dom";
+import { useRef } from "react";
+import { useDispatch } from "react-redux";
+import productsActions from "../store/actions/products";
+
+const { captureText } = productsActions;
 
 interface NavBarProp {
   search: boolean;
 }
 
 function NavBar({ search }: NavBarProp) {
+  const text = useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch();
+  const setText = () => {
+    if (text.current) {
+      dispatch(captureText({ text: text.current.value }));
+    }
+  };
   if (search) {
     return (
       <>
@@ -24,10 +36,12 @@ function NavBar({ search }: NavBarProp) {
             </Link>
             <form className="w-2/6 flex items-center grow justify-center">
               <input
-                className="h-[60px] rounded-2xl border-none w-full p-[10px] text-[14px] text-center my-0 mx-[20px]"
+                className="h-[60px] rounded-2xl border-none w-full p-[10px] text-[14px] text-center my-0 mx-[20px] text-black"
                 type="text"
                 placeholder="Search"
                 id="search"
+                ref={text}
+                onChange={setText}
               />
             </form>
             <ul className="w-2/6 flex items-center grow justify-end list-none">
