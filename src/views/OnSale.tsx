@@ -26,7 +26,7 @@ function OnSale() {
 
   return (
     <>
-      <NavBar search={true} />
+      <NavBar />
       <main>
         <a onClick={prevPage}>◀️</a>
         <div

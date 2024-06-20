@@ -1,32 +1,26 @@
 import { useRef } from "react";
+import { useDispatch } from "react-redux";
+import productsActions from "../store/actions/products";
+import ProductProp from "../interfaces/ProductProp";
+import Product from "../interfaces/Product";
 
-interface dataProduct {
-  id: string;
-  image: string;
-  name: string;
-  color: string;
-  description: string;
-  price: number;
-  quantity: number;
-}
+const { calculateTotal } = productsActions;
 
-function CartCard({
-  id,
-  image,
-  name,
-  color,
-  description,
-  price,
-  quantity,
-}: dataProduct) {
-  const units = useRef<HTMLInputElement>(null);
+function CartCard({ product }: ProductProp) {
+  const { id, title, price, colors, images, description, units } = product;
+  const dispatch = useDispatch();
+  const unitsToBuy = useRef<HTMLInputElement>(null);
 
   const manageUnits = () => {
-    const productsOnCart = JSON.parse(localStorage.getItem("cart") || "[]");
-    const one = productsOnCart.find((each: dataProduct) => each.id === id);
-    if (one && units.current) {
-      one.units = Number(units.current.value);
+    let productsOnCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    if (!Array.isArray(productsOnCart)) {
+      productsOnCart = [];
+    }
+    const one = productsOnCart.find((each: Product) => each.id === id);
+    if (one && unitsToBuy.current) {
+      one.units = Number(unitsToBuy.current.value);
       localStorage.setItem("cart", JSON.stringify(productsOnCart));
+      dispatch(calculateTotal({ products: productsOnCart }));
     } else {
       console.error(
         "Producto no encontrado o referencia de unidades no válida"
@@ -39,17 +33,17 @@ function CartCard({
       <article className="w-[340px] lg:w-[680px] md:h-[220px] flex justify-between items-center rounded-md px-[30px] py-[15px] lg:py-[30px] m-[10px] bg-[#f2f2f2]">
         <img
           className="hidden lg:inline-block w-[140px] h-[140px] rounded-sm"
-          src={image}
+          src={images[0]}
           alt="ipad"
         />
         <div className="flex flex-col justify-start flex-grow">
           <div className="lg:h-[120px] flex flex-col justify-between flex-grow p-[10px]">
             <span className="flex flex-col">
               <strong className="block lg:inline-block text-[16px]">
-                {name}
+                {title}
               </strong>
               <span className="block lg:inline-block text-[12px]">
-                - {color}
+                - {colors ? colors[0] : "Undefined"}
               </span>
             </span>
             <p className="hidden lg:inline-block w-[340px] truncate text-[12px]">
@@ -59,8 +53,8 @@ function CartCard({
               className="w-[70px] rounded-sm border-1 border-[#eaeaea] p-[5px] pl-[15px] text-[14px]"
               type="number"
               name="quantity"
-              defaultValue={quantity}
-              ref={units}
+              defaultValue={units}
+              ref={unitsToBuy}
               onChange={manageUnits}
               min="0"
               id={id}

@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 function NotFound() {
   return (
     <>
-      <NavBar search={false} />
+      <NavBar />
       <main>
         <section className={styles["hero"]}>
           <h2>404 Not Found</h2>

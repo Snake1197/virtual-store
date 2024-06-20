@@ -23,7 +23,7 @@ function Home() {
     axios
       .get("/products.json")
       .then((res) => {
-        const filterData = res.data.filter((each) =>
+        const filterData = res.data.filter((each: Product) =>
           each.title.toLowerCase().includes(text.toLowerCase())
         );
         setProducts(filterData);
@@ -33,7 +33,7 @@ function Home() {
 
   return (
     <>
-      <NavBar search={true} />
+      <NavBar />
       <Hero first="tecnología" second="renovada" />
       <main>
         <div

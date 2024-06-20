@@ -5,6 +5,10 @@ import CartCard from "../components/CartCard";
 import CartResume from "../components/CartResume";
 import { useState, useEffect } from "react";
 import Product from "../interfaces/Product";
+import { useDispatch } from "react-redux";
+import productsActions from "../store/actions/products";
+
+const { calculateTotal } = productsActions;
 
 function Cart() {
   //Inicializo el useState con lo encuentre en el storage, o en su defecto vacío.
@@ -12,31 +16,23 @@ function Cart() {
     const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
   });
-
+  const dispatch = useDispatch();
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
     if (savedCart) {
       setProductsOnCart(JSON.parse(savedCart));
+      dispatch(calculateTotal({ products: JSON.parse(savedCart) }));
     }
   }, []);
 
   return (
     <>
-      <NavBar search={false} />
+      <NavBar />
       <Hero first="mi" second="carrito" />
       <main>
         <section className="flex flex-col">
           {productsOnCart.map((each: Product, index: number) => (
-            <CartCard
-              key={index}
-              id={each.id}
-              name={each.title}
-              image={each.images[0]}
-              description={each.description ? each.description : "Undefined"}
-              price={each.price}
-              quantity={each.units ? each.units : 0}
-              color={each.colors ? each.colors[0] : "Undefined"}
-            />
+            <CartCard key={index} product={each} />
           ))}
         </section>
 

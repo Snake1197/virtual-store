@@ -31,7 +31,7 @@ function Details() {
    */ if (product) {
     return (
       <>
-        <NavBar search={false} />
+        <NavBar />
         <main>
           <div className={styles["details-container"]}>
             <div id="details" className={styles["columns-container"]}>
