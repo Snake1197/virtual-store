@@ -23,7 +23,7 @@ function Cart() {
       setProductsOnCart(JSON.parse(savedCart));
       dispatch(calculateTotal({ products: JSON.parse(savedCart) }));
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
