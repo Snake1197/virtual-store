@@ -1,7 +1,7 @@
 import styles from "./ProductCheckout.module.css";
 import { useState, useRef, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import productsActions from "../store/actions/products";
+import { useDispatch } from "react-redux";
 import Product from "../interfaces/Product";
 import ProductProp from "../interfaces/ProductProp";
 
@@ -9,59 +9,60 @@ const { updateCart } = productsActions;
 
 function ProductCheckout({ product }: ProductProp) {
   const dispatch = useDispatch();
-  //Inicialización correcta de useRef
   const units = useRef<HTMLInputElement>(null);
-  //Manejo de estados para la cantidad de productos
   const [quantity, setQuantity] = useState(1);
-  const [productPrice, updatePrice] = useState(product.price * quantity);
+  const [productPrice, setProductPrice] = useState(product.price);
+  const [buttonText, setButtonText] = useState("Add to cart");
+  const [productsInStorage, setProductsInStorage] = useState<Product[]>([]);
 
-  //Manejo de estados para los estilos del botón "Añadir al carrito"
-  const [button, setButton] = useState(false);
-  const storedProducts = localStorage.getItem("cart");
-
-  let productsInStorage: Product[] = storedProducts
-    ? JSON.parse(storedProducts)
-    : [];
-  //
   useEffect(() => {
-    let productsOnCart: Product[] = [];
+    const storedProducts = localStorage.getItem("cart");
     if (storedProducts) {
-      productsOnCart = storedProducts ? JSON.parse(storedProducts) : [];
+      const parsedProducts: Product[] = JSON.parse(storedProducts);
+      setProductsInStorage(parsedProducts);
+      const storedProduct = parsedProducts.find(
+        (item) => item.id === product.id
+      );
+      if (storedProduct) {
+        setQuantity(storedProduct.units || 1);
+        setProductPrice(storedProduct.price || product.price);
+        setButtonText("Remove from cart");
+      } else {
+        setQuantity(1);
+        setProductPrice(product.price);
+        setButtonText("Add to cart");
+      }
     } else {
       localStorage.setItem("cart", JSON.stringify([]));
     }
-    const one = productsOnCart.find((item) => item.id === product.id);
-    if (one) {
-      setButton(true);
-      updatePrice(one.units ? one.units : 0 * product.price);
-    } else {
-      setQuantity(1);
-      setButton(false);
-      updatePrice(product.price);
-    }
-  }, [product.id, storedProducts, product.price]);
+  }, [product.id, product.price]);
 
-  //Lógica para setear el LocalStorage el array de productos del carrito
   const manageCart = () => {
-    const one = productsInStorage.find((each) => each.id === product.id);
-    if (!one) {
+    const updatedProducts: Product[] = [...productsInStorage];
+    const existingProductIndex = updatedProducts.findIndex(
+      (item) => item.id === product.id
+    );
+
+    if (existingProductIndex !== -1) {
+      updatedProducts.splice(existingProductIndex, 1);
+      setQuantity(1);
+      setProductPrice(product.price);
+      setButtonText("Add to cart");
+    } else {
       const newProduct = {
         ...product,
         units: quantity,
         price: product.price * quantity,
       };
-      productsInStorage.push(newProduct);
-      setButton(true);
-    } else {
-      productsInStorage = productsInStorage.filter(
-        (each) => each.id !== product.id
-      );
-      setQuantity(1);
-      updatePrice(product.price);
-      setButton(false);
+      updatedProducts.push(newProduct);
+      setQuantity(quantity);
+      setProductPrice(product.price * quantity);
+      setButtonText("Remove from cart");
     }
-    localStorage.setItem("cart", JSON.stringify(productsInStorage));
-    dispatch(updateCart(productsInStorage));
+
+    localStorage.setItem("cart", JSON.stringify(updatedProducts));
+    dispatch(updateCart(updatedProducts));
+    setProductsInStorage(updatedProducts);
   };
 
   return (
@@ -101,26 +102,23 @@ function ProductCheckout({ product }: ProductProp) {
                 type="number"
                 min="1"
                 ref={units}
-                value={
-                  button
-                    ? productsInStorage.find((item) => item.id === product.id)
-                        ?.units
-                    : quantity
-                } //Para que se renderice correctamente el valor
-                //Comprobación de units.current para evitar la alerte de que puede ser null
-                onChange={() => {
-                  if (units.current) {
-                    setQuantity(Number(units.current.value));
-                    updatePrice(Number(units.current.value) * product.price);
-                  }
+                value={quantity}
+                onChange={(e) => {
+                  const newQuantity = parseInt(e.target.value, 10);
+                  setQuantity(newQuantity);
+                  setProductPrice(product.price * newQuantity);
                 }}
               />
               <button
                 type="button"
-                className={button ? styles["remove-btn"] : styles["cart-btn"]}
+                className={
+                  buttonText === "Remove from cart"
+                    ? styles["remove-btn"]
+                    : styles["cart-btn"]
+                }
                 onClick={manageCart}
               >
-                {button ? "Remove from cart" : "Add to cart"}
+                {buttonText}
               </button>
             </div>
           </div>

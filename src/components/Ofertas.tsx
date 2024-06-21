@@ -1,15 +1,14 @@
-import styles from "./Ofertas.module.css";
 import products from "../assets/products";
 import ProductCard from "../components/ProductCard";
 function Ofertas() {
   const onsale = products.filter((each: products) => each.onsale);
   return (
     <>
-      <div className={styles["sales-block"]}>
-        <h2 className={styles["sales-title"]}>Ofertas de la semana</h2>
+      <div className="my-[20px] mx-0 justify-center">
+        <h2 className="text-center text-[40px]">Ofertas de la semana</h2>
         <div
           id="product-container"
-          className="w-full h-[50px] bg-purple-800 text-white text-center"
+          className="w-full flex-wrap flex justify-between"
         >
           {onsale.map((each: products, index: number) => (
             <ProductCard
