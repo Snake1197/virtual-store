@@ -1,15 +1,16 @@
 import NavButton from "./NavButton";
 import { Link } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import productsActions from "../store/actions/products";
 import { useLocation } from "react-router-dom";
 
-const { captureText } = productsActions;
+const { captureText, getQuantityProduct } = productsActions;
 
 interface ProductState {
   text: string;
-  // Otros campos que definas en tu reducer de productos
+  total: number;
+  quantityTotal: number;
 }
 
 interface RootState {
@@ -21,7 +22,13 @@ function NavBar() {
   const pathname = location.pathname;
   const text = useRef<HTMLInputElement>(null);
   const textStore = useSelector((store: RootState) => store.products.text);
+  const quantityTotal = useSelector(
+    (store: RootState) => store.products.quantityTotal
+  );
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getQuantityProduct());
+  }, [dispatch]);
   const setText = () => {
     if (text.current) {
       dispatch(captureText({ text: text.current.value }));
@@ -74,12 +81,17 @@ function NavBar() {
                 />
               </Link>
             </li>
-            <li id="cart" className="h-12 w-12">
-              <Link className="h-[50px] w-[50px]" to="/cart">
+            <li id="cart" className="h-12 w-12 ">
+              <Link className="h-[50px] w-[50px] relative " to="/cart">
                 <img
                   className="h-[50px] w-[50px] p-[10px]"
                   src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAAAXNSR0IArs4c6QAAA81JREFUaEPtml2ITVEUx/9/UsjDiDFJHpQ8iAfNNCFfSV4YKUUzJOHVw0QKTT4ilDJ58UBpkq/yIIM3GV9NE0Z58aCRfGZGyseDByx3ZV/dtn3vuedjnzNz792vZ++11m//V3vts84hqmywynhRA650xWsK1xSusB2opXSFCfofTk1h3RIRkRGu9ACAXSSv2RxOhSsAWDl/A6gj+a0QupKBlXMayffVAjxEcko1pfQFkpvKAnYdWCJSD+ADgNHW8+Uk72R1yImIxvMVwHgrho0kL0YGNqf3DQCrLCPnSG7NEHgZAHvDtcpMJPklLvAGAJctI98B1JP8kQW0iBwHsNvy3UdyviueUBcPERkLYAjABMtYK0l7I1LhF5FnAOZazvaTPBQb2KT1WQDbLGO3SNqp7h3YnCuDDkfNuXgeJQW8FECPZewXgKkkVf3UhojoxqsAhUNjaCDpvC2GSmmjsK55o0XdctROsjM12r9X4KsA1lk+z5PcXCyO0MAG+giAvZbRfpKNaQGXKEdtJC8lDTwDwEuH0dkkn6cBLSKLAdyzfBUtR/l5kRQ2Kuuh0GQ5PEZyT0rArizrJbmwlP84wDsAnLKMvwMwvdiBkeRGiEg/gHmWzQ6Sh30B1wH4lMVVs0Q5aiL5xAuwSetuAKstBw8A3E5STYetWQBa7XLkejuy10ZOaQO8HsAVz3Dlmu8iuSVoclzgMQA+O66aQX59PF9BMjCzYgEblc8A2O6DIITN+ySXlDM/CWB1dLccZ57maMNuQbnX2tjARuXXWo4soMcAbnqCzJv9SPJ0GB9JAWvt22c5HiA5M0wwacxNCrjYVTOwLqYBWegjEWCT1n0Ami2AzlybpT1tKG8Xj0LDIuK6av4E0EhSuxLDYiSp8KRceXoLQNtA9tDu4QsPxD0k7WZESTeJAZu0PgFgpwewYiYPkjwQxl/SwJMBaIkaFyaIGHOzBTYqrwSgX+3SgM4e2EBr2/Soo2kfQ0zn0uEBnA8t12SbY3rG2vCze9lJwGd7aCVB4NtGooeW72CTsO8dWEROAmgDoCd4b65Oa6NPP8oFjjhrixn3Ciwi1wG0OJy3BEHHWVtqJ70Bi4j2urTn5RoPSS4qFlictUFp4xO4A4DzC57+cELS/rD+L1YRibw2S2DXy0Q+nsHci3tDCYUjr80SWDsgr3Iqj3IEUfK1UUQir80M2Ny49KeSLgu6m+SaoMBEJPLaTA6tgtuWqrVWfxID8DTodC4M1igdaW0mZSlIxSyeezuls4Apx2cNuJxdGslzagqPZPXKib3qFP4DPc5DTOx+iUAAAAAASUVORK5CYII="
                 />
+                {quantityTotal > 0 && (
+                  <span className="absolute top-0 right-0 rounded-full bg-white w-5 h-5 flex items-center justify-center text-red-600 text-xs">
+                    {quantityTotal}
+                  </span>
+                )}
               </Link>
             </li>
           </ul>

@@ -1,9 +1,14 @@
 import styles from "./ProductCheckout.module.css";
 import { useState, useRef, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import productsActions from "../store/actions/products";
 import Product from "../interfaces/Product";
 import ProductProp from "../interfaces/ProductProp";
 
+const { updateCart } = productsActions;
+
 function ProductCheckout({ product }: ProductProp) {
+  const dispatch = useDispatch();
   //Inicialización correcta de useRef
   const units = useRef<HTMLInputElement>(null);
   //Manejo de estados para la cantidad de productos
@@ -56,6 +61,7 @@ function ProductCheckout({ product }: ProductProp) {
       setButton(false);
     }
     localStorage.setItem("cart", JSON.stringify(productsInStorage));
+    dispatch(updateCart(productsInStorage));
   };
 
   return (

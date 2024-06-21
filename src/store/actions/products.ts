@@ -12,6 +12,17 @@ const calculateTotal = createAction("calculateTotal", (obj) => ({
   payload: { products: obj.products },
 }));
 
-const productsActions = { captureText, calculateTotal };
+const getQuantityProduct = createAction("loadProductsFromStorage");
+
+const updateCart = createAction("updateCart", (products) => ({
+  payload: { products },
+}));
+
+const productsActions = {
+  captureText,
+  calculateTotal,
+  getQuantityProduct,
+  updateCart,
+};
 
 export default productsActions;
