@@ -1,4 +1,3 @@
-import styles from "./Details.module.css";
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
 import ImagesProductDetails from "../components/ImagesProductDetails";
@@ -32,9 +31,9 @@ function Details() {
     return (
       <>
         <NavBar />
-        <main>
-          <div className={styles["details-container"]}>
-            <div id="details" className={styles["columns-container"]}>
+        <main className="grow w-full flex justify-center items-center p-[20px]">
+          <div className="w-[1080px] flex flex-wrap justify-between">
+            <div id="details" className="flex justify-center flex-wrap">
               <ImagesProductDetails product={product} />
               <ProductDescriptionDetail product={product} />
               <ProductCheckout product={product} />

@@ -29,7 +29,7 @@ function Cart() {
     <>
       <NavBar />
       <Hero first="mi" second="carrito" />
-      <main>
+      <main className="grow w-full flex justify-center items-center p-[20px]">
         <section className="flex flex-col">
           {productsOnCart.map((each: Product, index: number) => (
             <CartCard key={index} product={each} />

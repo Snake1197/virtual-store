@@ -27,10 +27,10 @@ function OnSale() {
   return (
     <>
       <NavBar />
-      <main>
+      <main className="grow w-full flex justify-center items-center p-[20px]">
         <a onClick={prevPage}>◀️</a>
         <div
-          className="w-full h-[50px] bg-purple-800 text-white text-center"
+          className="w-[1080px] h-[480px] flex flex-wrap gap-[10px] p-1"
           id="products"
         >
           {visibleProducts.map((each, index) => (
