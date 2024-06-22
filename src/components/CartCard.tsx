@@ -1,13 +1,14 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import productsActions from "../store/actions/products";
 import ProductProp from "../interfaces/ProductProp";
 import Product from "../interfaces/Product";
 
-const { calculateTotal } = productsActions;
+const { calculateTotal, updateCart } = productsActions;
 
 function CartCard({ product }: ProductProp) {
-  const { id, title, price, colors, images, description, units } = product;
+  const { id, title, total, colors, images, description, units } = product;
+  const [subtotal, updateSubTotal] = useState(total);
   const dispatch = useDispatch();
   const unitsToBuy = useRef<HTMLInputElement>(null);
 
@@ -19,8 +20,11 @@ function CartCard({ product }: ProductProp) {
     const one = productsOnCart.find((each: Product) => each.id === id);
     if (one && unitsToBuy.current) {
       one.units = Number(unitsToBuy.current.value);
+      one.total = Number(unitsToBuy.current.value) * one.price;
       localStorage.setItem("cart", JSON.stringify(productsOnCart));
       dispatch(calculateTotal({ products: productsOnCart }));
+      updateSubTotal(Number(unitsToBuy.current.value) * one.price);
+      dispatch(updateCart(productsOnCart));
     } else {
       console.error(
         "Producto no encontrado o referencia de unidades no válida"
@@ -61,7 +65,7 @@ function CartCard({ product }: ProductProp) {
             />
           </div>
           <strong className="text-start lg:text-end text-[14px] px-[10px]">
-            AR$ ${price}
+            AR$ ${subtotal}
           </strong>
         </div>
       </article>

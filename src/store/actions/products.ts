@@ -12,7 +12,7 @@ const calculateTotal = createAction("calculateTotal", (obj) => ({
   payload: { products: obj.products },
 }));
 
-const getQuantityProduct = createAction("loadProductsFromStorage");
+const getQuantityProduct = createAction("getQuantityProduct");
 
 const updateCart = createAction("updateCart", (products) => ({
   payload: { products },

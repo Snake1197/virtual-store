@@ -1,7 +1,7 @@
 function Footer() {
   return (
     <>
-      <footer className="min-h-64 bg-[#7525a7] flex flex-col items-center">
+      <footer className="min-h-64 bg-[#7525a7] flex flex-col items-center w-full">
         <div
           id="footer"
           className="

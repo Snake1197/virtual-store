@@ -51,7 +51,7 @@ function ProductCheckout({ product }: ProductProp) {
       const newProduct = {
         ...product,
         units: quantity,
-        price: product.price * quantity,
+        total: product.price * quantity,
       };
       updatedProducts.push(newProduct);
       setQuantity(quantity);

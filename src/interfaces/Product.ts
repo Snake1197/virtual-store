@@ -8,4 +8,5 @@ export default interface Product {
   colors?: string[];
   units?: number;
   onsale?: number;
+  total?: number;
 }

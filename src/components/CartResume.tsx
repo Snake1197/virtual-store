@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 interface ProductState {
   text: string;
   total: number;
+  subtotal: number;
   // Otros campos que definas en tu reducer de productos
 }
 
@@ -16,11 +17,7 @@ function CartResume() {
     <>
       <div className="w-[340px] h-[220px] flex flex-col justify-between rounded-md p-[30px] m-[10px] bg-[#f2f2f2]">
         <div className="flex-grow flex flex-col justify-between">
-          <h2 className="flex justify-between text-[20px] font-bold">
-            <span>Resumen</span>
-            <span>del</span>
-            <span>pedido</span>
-          </h2>
+          <h2 className="text-[20px] font-bold"> Resumen del pedido</h2>
           <div className="flex justify-between items-center">
             <h3>Total</h3>
             <strong>${total}</strong>
