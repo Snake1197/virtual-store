@@ -47,7 +47,7 @@ function Details() {
             <h2 className="text-center text-[40px]">Ofertas de la semana</h2>
             <div
               id="product-container"
-              className="w-[1080px] flex-wrap flex justify-between"
+              className="w-[1080px] grid grid-cols-4 justify-between"
             >
               {onSaleProducts
                 ? onSaleProducts.map((each, index: number) => (

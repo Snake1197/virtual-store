@@ -1,10 +1,10 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import productsActions from "../store/actions/products";
 import ProductProp from "../interfaces/ProductProp";
 import Product from "../interfaces/Product";
 
-const { calculateTotal, updateCart } = productsActions;
+const { calculateTotal, updateCart, removeFromCart } = productsActions;
 
 function CartCard({ product }: ProductProp) {
   const { id, title, total, colors, images, description, units } = product;
@@ -12,19 +12,39 @@ function CartCard({ product }: ProductProp) {
   const dispatch = useDispatch();
   const unitsToBuy = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    // Actualizar subtotal cuando cambia el total del producto
+    updateSubTotal(product.total);
+  }, [product.total]);
+  if (unitsToBuy.current) {
+    unitsToBuy.current.value = String(product.units); // Actualizar el valor del input
+  }
+
   const manageUnits = () => {
     let productsOnCart = JSON.parse(localStorage.getItem("cart") || "[]");
     if (!Array.isArray(productsOnCart)) {
       productsOnCart = [];
     }
+    const updatedProducts = [...productsOnCart];
     const one = productsOnCart.find((each: Product) => each.id === id);
     if (one && unitsToBuy.current) {
       one.units = Number(unitsToBuy.current.value);
       one.total = Number(unitsToBuy.current.value) * one.price;
-      localStorage.setItem("cart", JSON.stringify(productsOnCart));
-      dispatch(calculateTotal({ products: productsOnCart }));
-      updateSubTotal(Number(unitsToBuy.current.value) * one.price);
-      dispatch(updateCart(productsOnCart));
+      if (one.units === 0) {
+        const index = updatedProducts.findIndex((item) => item.id === id);
+        if (index !== -1) {
+          updatedProducts.splice(index, 1);
+        }
+        localStorage.setItem("cart", JSON.stringify(updatedProducts));
+        dispatch(removeFromCart(id));
+        dispatch(calculateTotal({ products: updatedProducts }));
+        dispatch(updateCart(updatedProducts));
+      } else {
+        localStorage.setItem("cart", JSON.stringify(productsOnCart));
+        dispatch(calculateTotal({ products: productsOnCart }));
+        updateSubTotal(Number(unitsToBuy.current.value) * one.price);
+        dispatch(updateCart(productsOnCart));
+      }
     } else {
       console.error(
         "Producto no encontrado o referencia de unidades no válida"

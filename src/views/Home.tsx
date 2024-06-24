@@ -36,10 +36,7 @@ function Home() {
       <NavBar />
       <Hero first="tecnología" second="renovada" />
       <main className="grow w-full flex justify-center items-center p-[20px]">
-        <div
-          className="w-[1080px] flex flex-wrap justify-between"
-          id="products"
-        >
+        <div className="w-[1080px] grid grid-cols-3" id="products">
           {products.map((each: Product, index: number) => (
             <ProductCard
               key={index}

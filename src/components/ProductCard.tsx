@@ -6,7 +6,7 @@ function ProductCard({ id, title, price, colors = [], images }: Product) {
     <>
       <Link
         key={id}
-        className="bg-[#f0f0f0] text-[#383838] rounded-[15px] w-[250px] m-[15px] no-underline"
+        className="bg-[#f0f0f0] text-[#383838] rounded-[15px] w-[250px] m-[15px] no-underline justify-self-center"
         to={"/details/" + id}
       >
         <img

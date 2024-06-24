@@ -63,7 +63,19 @@ function ProductCheckout({ product }: ProductProp) {
     dispatch(updateCart(updatedProducts));
     setProductsInStorage(updatedProducts);
   };
-
+  const manageUnits = (newQuantity: number, newTotal: number) => {
+    let productsOnCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    if (!Array.isArray(productsOnCart)) {
+      productsOnCart = [];
+    }
+    const one = productsOnCart.find((each: Product) => each.id === product.id);
+    if (one && buttonText == "Remove from cart") {
+      one.units = Number(newQuantity);
+      one.total = Number(newTotal);
+      localStorage.setItem("cart", JSON.stringify(productsOnCart));
+      dispatch(updateCart(productsOnCart));
+    }
+  };
   return (
     <>
       <div className="flex-col w-[340px] p-[10px] m-[10px]">
@@ -107,6 +119,7 @@ function ProductCheckout({ product }: ProductProp) {
                   const newQuantity = parseInt(e.target.value, 10);
                   setQuantity(newQuantity);
                   setProductPrice(product.price * newQuantity);
+                  manageUnits(newQuantity, product.price * newQuantity);
                 }}
               />
               <button
